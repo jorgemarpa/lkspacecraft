@@ -55,7 +55,7 @@ def truncate_directory_string(directory_string):
         else:
             line = f"{line}+"
             lines.append(line)
-            line = ""
+            line = f"/{word}"
     lines.append(line)
     return lines
 
