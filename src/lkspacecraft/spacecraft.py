@@ -11,7 +11,7 @@ from astropy.coordinates import SkyCoord
 from astropy.time import Time
 from astropy.utils.data import cache_contents
 
-from . import is_test_mode, log
+from . import is_test_mode, is_offline_mode, log
 from .utils import create_meta_kernel
 
 
@@ -96,6 +96,13 @@ class Spacecraft(object):
             )
             meta_kernel = cache_contents(pkgname="lkspacecraft")[
                 "https://github.com/lightkurve/lkspacecraft/src/lkspacecraft/data/TestMeta.txt"
+            ]
+        elif is_offline_mode():
+            log.warning(
+                "`lkspacecraft` is in offline mode, and will not download new kernels. Will use cached kernels."
+            )
+            meta_kernel = cache_contents(pkgname="lkspacecraft")[
+                "https://github.com/lightkurve/lkspacecraft/src/lkspacecraft/data/Meta.txt"
             ]
         else:
             log.info(
