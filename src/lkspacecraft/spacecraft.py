@@ -1,6 +1,5 @@
 """Classes for working with the orbits of spacecraft"""
 
-from typing import Union
 
 import astropy.units as u
 import numpy as np
@@ -11,7 +10,7 @@ from astropy.coordinates import SkyCoord
 from astropy.time import Time
 from astropy.utils.data import cache_contents
 
-from . import is_test_mode, is_offline_mode, log
+from . import is_offline_mode, is_test_mode, log
 from .utils import create_meta_kernel
 
 
@@ -20,7 +19,7 @@ class BadEphemeris(Exception):
         super().__init__(message)
 
 
-__all__ = ["TESSSpacecraft", "KeplerSpacecraft"]
+__all__ = ["KeplerSpacecraft", "TESSSpacecraft"]
 
 
 def _process_time(time) -> Time:
@@ -42,7 +41,7 @@ def _process_time(time) -> Time:
     return time
 
 
-class Spacecraft(object):
+class Spacecraft:
     """
     A base class for handling spacecraft ephemeris data and calculations.
 
@@ -218,7 +217,7 @@ class Spacecraft(object):
         return self._get_state_vector(time=time, observer=observer)[1]
 
     def get_barycentric_time_correction(
-        self, time: Time, ra: Union[float, npt.NDArray], dec: Union[float, npt.NDArray]
+        self, time: Time, ra: float | npt.NDArray, dec: float | npt.NDArray
     ) -> npt.NDArray:
         """Returns the barycentric time correction in days for observations of a particular target specified by RA and Dec.
 
@@ -417,7 +416,7 @@ class KeplerSpacecraft(Spacecraft):
         return "KeplerSpacecraft"
 
     def get_barycentric_time_correction(
-        self, time: Time, ra: Union[float, npt.NDArray], dec: Union[float, npt.NDArray]
+        self, time: Time, ra: float | npt.NDArray, dec: float | npt.NDArray
     ) -> npt.NDArray:
         """Returns the barycentric time correction in days for observations of a particular target specified by RA and Dec.
 

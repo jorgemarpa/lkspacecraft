@@ -1,5 +1,5 @@
 # Standard library
-import os  # noqa
+import os
 
 PACKAGEDIR = os.path.abspath(os.path.dirname(__file__))
 TEST_MODE = False
@@ -34,7 +34,7 @@ def is_offline_mode():
     return OFFLINE_MODE
 
 
-from importlib.metadata import PackageNotFoundError, version  # noqa
+from importlib.metadata import PackageNotFoundError, version
 
 
 def get_version():
@@ -46,8 +46,8 @@ def get_version():
 
 __version__ = get_version()
 
-import logging  # noqa: E402
-import os  # noqa
+import logging
+import os
 from glob import glob  # noqa
 
 log = logging.getLogger("lkspacecraft")
@@ -56,7 +56,7 @@ PACKAGEDIR = os.path.abspath(os.path.dirname(__file__))
 KERNELDIR = f"{PACKAGEDIR}/data/kernels/"
 
 # from .io import update_kernels
-from .utils import create_meta_test_kernel  # noqa
+from .utils import create_meta_test_kernel
 
 create_meta_test_kernel()
 
