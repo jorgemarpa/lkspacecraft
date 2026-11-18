@@ -1,6 +1,5 @@
 """Classes for working with the orbits of spacecraft"""
 
-
 import astropy.units as u
 import numpy as np
 import numpy.typing as npt
@@ -30,7 +29,7 @@ def _process_time(time) -> Time:
         except ValueError:
             try:
                 time = Time(time, scale="tdb")
-            except Exception:
+            except Exception:  # noqa
                 raise ValueError(
                     "Can not parse input time. Pass an `astropy.time.Time` object."
                 )
@@ -147,7 +146,7 @@ class Spacecraft:
                     # Update the global start and end times
                     start_et = min(start_et, interval_start)
                     end_et = max(end_et, interval_end)
-                except Exception:
+                except Exception:  # noqa
                     continue
         start_time = Time(spiceypy.et2datetime(start_et), scale="utc")
         end_time = Time(spiceypy.et2datetime(end_et), scale="utc")
